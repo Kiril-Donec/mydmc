@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeSteal - Minecraft сервер</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #1a1a1a;
+            padding: 20px 0;
+            border-bottom: 2px solid #ff5555;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 8px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff5555;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ff5555;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/background.png') no-repeat center center;
+            background-size: cover;
+        }
+        
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ff5555;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #ff5555;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e04444;
+        }
+        
+        /* Features */
+        .features {
+            padding: 80px 0;
+            background-color: #1a1a1a;
+        }
+        
+        .section-heading {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-heading h2 {
+            font-size: 36px;
+            color: #ff5555;
+            margin-bottom: 10px;
+        }
+        
+        .section-heading p {
+            font-size: 16px;
+            color: #cccccc;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: #252525;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: #ff5555;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .feature-card p {
+            color: #cccccc;
+            font-size: 14px;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-image {
+            flex: 1;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            font-size: 36px;
+            color: #ff5555;
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            color: #cccccc;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 80px 0;
+            background-color: #1a1a1a;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .price-card {
+            background-color: #252525;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .price-card.featured {
+            border: 2px solid #ff5555;
+            position: relative;
+        }
+        
+        .price-card.featured::before {
+            content: "Популярный";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff5555;
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .price-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .price {
+            font-size: 36px;
+            color: #ff5555;
+            margin-bottom: 20px;
+        }
+        
+        .price span {
+            font-size: 16px;
+            color: #cccccc;
+        }
+        
+        .benefits {
+            margin-bottom: 30px;
+        }
+        
+        .benefits li {
+            list-style: none;
+            padding: 8px 0;
+            border-bottom: 1px solid #333333;
+            color: #cccccc;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #111111;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            color: #ff5555;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            text-decoration: none;
+            color: #cccccc;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #ff5555;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #252525;
+            border-radius: 50%;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #ff5555;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333333;
+            color: #777777;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="images/icon.png" alt="LifeSteal Logo">
+                <h1>LifeSteal</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Особенности</a></li>
+                    <li><a href="#about">О сервере</a></li>
+                    <li><a href="#pricing">Привилегии</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Добро пожаловать на LifeSteal!</h2>
+            <p>Уникальный Minecraft сервер, где за каждое убийство вы получаете сердце противника. 
+            Сражайтесь, выживайте и становитесь сильнее в мире, где каждая смерть имеет цену.</p>
+            <a href="#" class="btn">Начать играть</a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Особенности сервера</h2>
+                <p>Что делает LifeSteal уникальным и захватывающим</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">❤️</div>
+                    <h3>Система сердец</h3>
+                    <p>Убивая игроков, вы забираете их сердца. Погибая - теряете свои. Сражайтесь за выживание и становитесь сильнее!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏰</div>
+                    <h3>PvP без ограничений</h3>
+                    <p>Никаких правил в PvP. Создавайте союзы, планируйте рейды и защищайте свои территории от врагов.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔮</div>
+                    <h3>Уникальные предметы</h3>
+                    <p>Находите редкие артефакты, крафтите уникальные предметы и используйте их в бою для превосходства над противниками.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="/api/placeholder/600/400" alt="LifeSteal Gameplay">
+                </div>
+                <div class="about-text">
+                    <h2>О нашем сервере</h2>
+                    <p>LifeSteal - это хардкорный PvP-сервер, где каждое убийство приносит вам дополнительное сердце здоровья, а каждая смерть стоит вам одного сердца.</p>
+                    <p>Если вы потеряете все сердца, вы будете забанены на сервере на определенное время. Чтобы выжить, вам придется сражаться, прятаться или заключать союзы с другими игроками.</p>
+                    <p>На нашем сервере нет запретов на гриферство или рейды. Это мир настоящего выживания, где только сильнейшие смогут процветать!</p>
+                    <a href="#" class="btn">Присоединиться сейчас</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Поддержка сервера</h2>
+                <p>Выберите подходящий вариант поддержки сервера и получите дополнительные возможности</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Значки и цвета</h3>
+                    <ul class="benefits">
+                        <li>Значок перед ником - 25₽/месяц</li>
+                        <li>Значок после ника - 35₽/месяц</li>
+                        <li>Свой значок (на заказ) - 60₽/месяц</li>
+                        <li>Изменить цвет ника - 20₽/месяц</li>
+                        <li>Выбор значка у @vermax55 в Telegram</li>
+                    </ul>
+                    <a href="#" class="btn">Выбрать</a>
+                </div>
+                <div class="price-card featured">
+                    <h3>💎PREMIUM</h3>
+                    <div class="price">100₽</div>
+                    <ul class="benefits">
+                        <li>Все преимущества премиум статуса</li>
+                        <li>Специальные возможности</li>
+                        <li>Уникальный значок</li>
+                    </ul>
+                    <a href="#" class="btn">Купить</a>
+                </div>
+                <div class="price-card">
+                    <h3>Игровые услуги</h3>
+                    <ul class="benefits">
+                        <li>Проходка на сервер - 49₽/месяц</li>
+                        <li>Разбан - 199₽</li>
+                        <li>Сердце (1 шт) - 10₽</li>
+                        <li>Поддержка сервера - [скоро]</li>
+                    </ul>
+                    <a href="#" class="btn">Выбрать</a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px; color: #cccccc;">
+                <p>* Администрация оставляет за собой право отклонить выбранный значок</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LifeSteal</h3>
+                    <p>Увлекательный хардкорный PvP-сервер Minecraft с уникальной механикой сердец.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Ссылки</h3>
+                    <ul>
+                        <li><a href="#features">Особенности</a></li>
+                        <li><a href="#about">О сервере</a></li>
+                        <li><a href="#pricing">Привилегии</a></li>
+                        <li><a href="#rules">Правила</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">VK</a></li>
+                        <li><a href="#">Telegram</a></li>
+                        <li><a href="mailto:support@lifesteal.ru">support@lifesteal.ru</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Сообщество</h3>
+                    <div class="social-links">
+                        <a href="#">VK</a>
+                        <a href="#">YT</a>
+                        <a href="#">TG</a>
+                        <a href="#">DS</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 LifeSteal. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
